@@ -1,3 +1,3 @@
 # PatternWithDescription
 
-Download code and Execute `mvn exec:java`.
+Download code and Execute `mvn compile exec:java`.
