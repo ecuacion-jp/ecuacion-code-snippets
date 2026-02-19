@@ -14,9 +14,6 @@ public class Main {
     localized();
     
 
-    // for (String message : ExceptionUtil.getMessageList(set)) {
-    // System.out.println(message);
-    // }
   }
 
   private static void 基礎() {
@@ -29,9 +26,9 @@ public class Main {
   }
 
   private static void localized() {
-    PersonLocalized person = new PersonLocalized("john", 30);
+    PersonWithoutMessage person = new PersonWithoutMessage("john", 30);
 
-    Set<ConstraintViolation<PersonLocalized>> set = validator.validate(person);
+    Set<ConstraintViolation<PersonWithoutMessage>> set = validator.validate(person);
     for (String message : ExceptionUtil.getMessageList(set)) {
       System.out.println(message);
     }
