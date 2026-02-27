@@ -13,7 +13,7 @@ public class Main {
 
   public static void main(String... args) {
     基本的な使い方();
-    ExceptionUtilによるメッセージ出力();
+    ExcxeptionUtilを使用したメッセージ出力();
     propertyPathの指定();
   }
 
@@ -27,7 +27,7 @@ public class Main {
     }
   }
 
-  private static void ExceptionUtilによるメッセージ出力() {
+  private static void ExcxeptionUtilを使用したメッセージ出力() {
     Project project = new Project("some project",
         LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 1));
 
