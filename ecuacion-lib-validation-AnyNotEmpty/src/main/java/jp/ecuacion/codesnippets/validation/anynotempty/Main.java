@@ -11,25 +11,25 @@ public class Main {
   private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
   public static void main(String... args) {
-    基礎();
-    ExceptionUtilによるメッセージ出力();
+    基本的な使い方();
+    ExceptionUtilを使用したメッセージ出力();
   }
 
-  public static void 基礎() {
-    Name nameAllEmpty = new Name("", null, "");
-    
-    Set<ConstraintViolation<Name>> set = validator.validate(nameAllEmpty);
-    for (ConstraintViolation<Name> v : set) {
+  public static void 基本的な使い方() {
+    PersonWithMessage person = new PersonWithMessage("John", null, "");
+
+    Set<ConstraintViolation<PersonWithMessage>> set = validator.validate(person);
+    for (ConstraintViolation<?> v : set) {
       System.out.println(v.getMessage());
     }
-}
-
-private static void ExceptionUtilによるメッセージ出力() {
-  NameWithoutMessage nameAllEmpty = new NameWithoutMessage("", null, "");
-
-  Set<ConstraintViolation<NameWithoutMessage>> set = validator.validate(nameAllEmpty);
-  for (String message : ExceptionUtil.getMessageList(set)) {
-    System.out.println(message);
   }
-}
+
+  private static void ExceptionUtilを使用したメッセージ出力() {
+    Person person = new Person("", null, "");
+
+    Set<ConstraintViolation<Person>> set = validator.validate(person);
+    for (String message : ExceptionUtil.getMessageList(set)) {
+      System.out.println(message);
+    }
+  }
 }
