@@ -13,7 +13,8 @@ public class Main {
 
   public static void main(String... args) {
     基本的な使い方();
-    ExcxeptionUtilを使用したメッセージ出力();
+    ExceptionUtilを使用したメッセージ出力();
+    ValidationMessages_propertiesの使用();
     propertyPathの指定();
   }
 
@@ -27,7 +28,12 @@ public class Main {
     }
   }
 
-  private static void ExcxeptionUtilを使用したメッセージ出力() {
+  private static void ValidationMessages_propertiesの使用() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  private static void ExceptionUtilを使用したメッセージ出力() {
     Project project = new Project("some project",
         LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 1));
 

@@ -1,4 +1,4 @@
-package jp.ecuacion.codesnippets.validation.lessthan;
+package jp.ecuacion.codesnippets.validation.classlevelvavlidator;
 
 import jp.ecuacion.lib.validation.constraints.GreaterThanOrEqualTo;
 
