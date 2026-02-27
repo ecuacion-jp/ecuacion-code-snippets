@@ -15,8 +15,8 @@ public class Main {
 
   public static void main(String... args) {
     ExceptionUtilの基本的な使い方();
+    メッセージに項目名を含めたい();
     メッセージの項目名表示有無を選択したい_システムデフォルト設定();
-    locale指定();
 
     ValidationUtilの基本的な使い方();
     メッセージの項目名表示有無を選択したい_個別validation時();
@@ -33,20 +33,20 @@ public class Main {
     }
   }
 
+  private static void メッセージに項目名を含めたい() {
+    Account account = new Account(null, null);
+
+    Set<ConstraintViolation<Account>> set = validator.validate(account);
+    for (String message : ExceptionUtil.getMessageList(set)) {
+      System.out.println(message);
+    }
+  }
+
   public static void メッセージの項目名表示有無を選択したい_システムデフォルト設定() {
     Account account = new Account(null, null);
 
     Set<ConstraintViolation<Account>> set = validator.validate(account);
     for (String message : ExceptionUtil.getMessageList(set, true)) {
-      System.out.println(message);
-    }
-  }
-
-  private static void locale指定() {
-    Account account = new Account(null, null);
-
-    Set<ConstraintViolation<Account>> set = validator.validate(account);
-    for (String message : ExceptionUtil.getMessageList(set)) {
       System.out.println(message);
     }
   }
