@@ -11,7 +11,7 @@ public class Main {
 
   public static void main(String[] args) {
     基本的な使い方();
-    ExcxeptionUtilを使用したメッセージ出力();
+    ExceptionUtilを使用したメッセージ出力();
     descriptionのlocalize();
 
 
@@ -26,7 +26,7 @@ public class Main {
     }
   }
 
-  private static void ExcxeptionUtilを使用したメッセージ出力() {
+  private static void ExceptionUtilを使用したメッセージ出力() {
     PersonWithJapaneseDescription person = new PersonWithJapaneseDescription("john", 30);
 
     Set<ConstraintViolation<PersonWithJapaneseDescription>> set = validator.validate(person);

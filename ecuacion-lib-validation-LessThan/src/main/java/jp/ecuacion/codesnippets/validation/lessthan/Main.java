@@ -15,7 +15,6 @@ public class Main {
     基本的な使い方();
     ExceptionUtilを使用したメッセージ出力();
     ValidationMessages_propertiesの使用();
-    propertyPathの指定();
   }
 
   public static void 基本的な使い方() {
@@ -40,15 +39,6 @@ public class Main {
     Set<ConstraintViolation<Project>> set = validator.validate(project);
     for (String message : ExceptionUtil.getMessageList(set)) {
       System.out.println(message);
-    }
-  }
-
-  public static void propertyPathの指定() {
-    Family family = new Family(new Person("John", 25), new Person("Paul", 27));
-
-    Set<ConstraintViolation<Family>> setPropertyPath = validator.validate(family);
-    for (ConstraintViolation<Family> v : setPropertyPath) {
-      System.out.println(v.getMessage());
     }
   }
 }
