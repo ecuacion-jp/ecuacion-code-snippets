@@ -14,7 +14,6 @@ public class Main {
   public static void main(String... args) {
     基本的な使い方();
     ExceptionUtilを使用したメッセージ出力();
-    ValidationMessages_propertiesの使用();
   }
 
   public static void 基本的な使い方() {
@@ -25,11 +24,6 @@ public class Main {
     for (ConstraintViolation<ProjectWithMessage> v : set) {
       System.out.println(v.getMessage());
     }
-  }
-
-  private static void ValidationMessages_propertiesの使用() {
-    // TODO Auto-generated method stub
-    
   }
 
   private static void ExceptionUtilを使用したメッセージ出力() {
