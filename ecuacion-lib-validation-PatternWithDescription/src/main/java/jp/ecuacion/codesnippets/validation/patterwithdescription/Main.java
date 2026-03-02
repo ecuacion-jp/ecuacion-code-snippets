@@ -13,8 +13,6 @@ public class Main {
     基本的な使い方();
     ExceptionUtilを使用したメッセージ出力();
     descriptionのlocalize();
-
-
   }
 
   private static void 基本的な使い方() {
