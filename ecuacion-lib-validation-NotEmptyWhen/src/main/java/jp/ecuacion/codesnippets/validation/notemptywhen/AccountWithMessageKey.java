@@ -4,7 +4,7 @@ import jp.ecuacion.lib.validation.constraints.NotEmptyWhen;
 import jp.ecuacion.lib.validation.constraints.enums.ConditionValue;
 
 @NotEmptyWhen(propertyPath = "guardianName", conditionPropertyPath = "isUnderage",
-    conditionValue = ConditionValue.TRUE)
-public record Account(String name, boolean isUnderage, String guardianName) {
+    conditionValue = ConditionValue.TRUE, message = "{underageNeedsGuardian.message}")
+public record AccountWithMessageKey(String name, boolean isUnderage, String guardianName) {
 
 }
