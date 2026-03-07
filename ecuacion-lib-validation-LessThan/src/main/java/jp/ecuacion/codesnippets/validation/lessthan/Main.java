@@ -13,6 +13,7 @@ public class Main {
 
   public static void main(String... args) {
     基本的な使い方();
+    ValidationMessages_propertiesの使用();
     ExceptionUtilを使用したメッセージ出力();
   }
 
@@ -21,7 +22,17 @@ public class Main {
         new ProjectWithMessage("some project", LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 1));
 
     Set<ConstraintViolation<ProjectWithMessage>> set = validator.validate(project);
-    for (ConstraintViolation<ProjectWithMessage> v : set) {
+    for (ConstraintViolation<?> v : set) {
+      System.out.println(v.getMessage());
+    }
+  }
+
+  private static void ValidationMessages_propertiesの使用() {
+    ProjectWithMessageKey project =
+        new ProjectWithMessageKey("some project", LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 1));
+
+    Set<ConstraintViolation<ProjectWithMessageKey>> set = validator.validate(project);
+    for (ConstraintViolation<?> v : set) {
       System.out.println(v.getMessage());
     }
   }
