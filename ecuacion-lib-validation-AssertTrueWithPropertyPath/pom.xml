@@ -19,7 +19,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>3.6.3</version>
 				<configuration>
-					<mainClass>jp.ecuacion.codesnippets.validation.patterwithdescription.Main</mainClass>
+					<mainClass>jp.ecuacion.codesnippets.validation.asserttruewithpropertypath.Main</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

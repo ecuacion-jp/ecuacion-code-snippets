@@ -1,4 +1,4 @@
-package jp.ecuacion.codesnippets.validation.patterwithdescription;
+package jp.ecuacion.codesnippets.validation.asserttruewithpropertypath;
 
 import jp.ecuacion.lib.validation.constraints.AssertTrueWithPropertyPath;
 
