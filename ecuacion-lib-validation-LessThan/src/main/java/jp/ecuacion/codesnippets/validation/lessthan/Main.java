@@ -45,5 +45,10 @@ public class Main {
     for (String message : ExceptionUtil.getMessageList(set)) {
       System.out.println(message);
     }
+    
+    // 項目名を追加した場合
+    for (String message : ExceptionUtil.getMessageList(set, true)) {
+      System.out.println(message);
+    }
   }
 }
