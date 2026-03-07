@@ -12,6 +12,7 @@ public class Main {
 
   public static void main(String... args) {
     基本的な使い方();
+    ValidationMessages_propertiesの使用();
     ExceptionUtilを使用したメッセージ出力();
   }
 
@@ -19,6 +20,15 @@ public class Main {
     PersonWithMessage person = new PersonWithMessage("John", null, "");
 
     Set<ConstraintViolation<PersonWithMessage>> set = validator.validate(person);
+    for (ConstraintViolation<?> v : set) {
+      System.out.println(v.getMessage());
+    }
+  }
+
+  private static void ValidationMessages_propertiesの使用() {
+    PersonWithMessageKey person = new PersonWithMessageKey("John", null, "");
+
+    Set<ConstraintViolation<PersonWithMessageKey>> set = validator.validate(person);
     for (ConstraintViolation<?> v : set) {
       System.out.println(v.getMessage());
     }
