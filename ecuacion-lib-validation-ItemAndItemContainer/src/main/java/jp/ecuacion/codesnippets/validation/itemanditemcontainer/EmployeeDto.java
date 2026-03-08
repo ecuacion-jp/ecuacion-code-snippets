@@ -10,6 +10,6 @@ public record EmployeeDto(@NotEmpty String name, @NotEmpty String deptId) implem
 
   @Override
   public Item[] customizedItems() {
-    return new Item[] {new Item("deptId").itemNameKey("name")};
+    return new Item[] {new Item("deptId").itemNameKey("deptName")};
   }
 }
