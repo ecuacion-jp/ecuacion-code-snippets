@@ -1,7 +1,6 @@
 package jp.ecuacion.codesnippets.validation.jakartavalidationlist;
 
 import jakarta.validation.ConstraintViolationException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
