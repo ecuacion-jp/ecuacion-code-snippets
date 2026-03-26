@@ -12,12 +12,14 @@ public class Main {
   public static void main(String[] args) {
     基本的な使い方();
     ExceptionUtilを使用したメッセージ出力();
+    項目名の表示();
     descriptionのlocalize();
   }
 
   private static void 基本的な使い方() {
     PersonWithJapaneseDescription person = new PersonWithJapaneseDescription("john", 30);
 
+    // 標準のvalidation処理
     Set<ConstraintViolation<PersonWithJapaneseDescription>> set = validator.validate(person);
     for (ConstraintViolation<?> cv : set) {
       System.out.println(cv.getMessage());
@@ -28,12 +30,16 @@ public class Main {
     PersonWithJapaneseDescription person = new PersonWithJapaneseDescription("john", 30);
 
     Set<ConstraintViolation<PersonWithJapaneseDescription>> set = validator.validate(person);
-    for (String message : ExceptionUtil.getMessageList(set)) {
+    for (String message : ExceptionUtil.getMessageList(set)) { // <- ExceptionUtilを使用
       System.out.println(message);
     }
-    
-    // 項目名を追加した場合
-    for (String message : ExceptionUtil.getMessageList(set, true)) {
+  }
+
+  private static void 項目名の表示() {
+    PersonWithJapaneseDescription person = new PersonWithJapaneseDescription("john", 30);
+
+    Set<ConstraintViolation<PersonWithJapaneseDescription>> set = validator.validate(person);
+    for (String message : ExceptionUtil.getMessageList(set, true /* <- コレ！ */)) {
       System.out.println(message);
     }
   }
