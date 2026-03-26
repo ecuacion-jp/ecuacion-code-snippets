@@ -1,56 +1,34 @@
 package jp.ecuacion.codesnippets.validation.jakartavalidationexceptionutil;
 
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.MessageInterpolator;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import jakarta.validation.metadata.ConstraintDescriptor;
 import java.util.Locale;
 import java.util.Set;
-import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
-import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
+import jp.ecuacion.lib.core.util.ExceptionUtil;
 
 public class Main {
+
+  private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
   public static void main(String[] args) {
-    Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-
-    Set<ConstraintViolation<User>> violations = validator.validate(new User(null));
-    for (ConstraintViolation<?> violation : violations) {
-      System.out.println(getMessage(violation, Locale.ENGLISH));
-    }
+    使い方();
   }
 
-  private static String getMessage(ConstraintViolation<?> violation, Locale locale) {
-    MessageInterpolator.Context context = new MessageInterpolatorContext(violation);
+  private static void 使い方() {
+    try {
+      // 以下、service層のイメージ。ここではlocale不要
+      Set<ConstraintViolation<Account>> violations = validator.validate(new Account(null));
+      if (violations.size() > 0) {
+        throw new ConstraintViolationException(violations);
+      }
 
-    PlatformResourceBundleLocator userBundleLocator =
-        new PlatformResourceBundleLocator("ValidationMessages");
-    MessageInterpolator interpolator = new ResourceBundleMessageInterpolator(userBundleLocator);
-
-
-    return interpolator.interpolate(violation.getMessageTemplate(), context, locale);
-  }
-
-  private static class MessageInterpolatorContext implements MessageInterpolator.Context {
-    private ConstraintViolation<?> violation;
-
-    public MessageInterpolatorContext(ConstraintViolation<?> violation) {
-      this.violation = violation;
-    }
-
-    @Override
-    public ConstraintDescriptor<?> getConstraintDescriptor() {
-      return violation.getConstraintDescriptor();
-    }
-
-    @Override
-    public Object getValidatedValue() {
-      return violation.getInvalidValue();
-    }
-
-    @Override
-    public <T> T unwrap(Class<T> type) {
-      return null;
+    } catch (ConstraintViolationException ex) {
+      // 以下、exceptionHandler内のイメージ。ここでlocaleを使用
+      for (String message : ExceptionUtil.getMessageList(ex, Locale.JAPANESE)) {
+        System.out.println(message);
+      }
     }
   }
 }
