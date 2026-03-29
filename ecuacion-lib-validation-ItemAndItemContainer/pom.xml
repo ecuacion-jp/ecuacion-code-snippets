@@ -2,9 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>jp.ecuacion.codesnippets</groupId>
 	<artifactId>ItemAndItemContainer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<parent>
+		<groupId>jp.ecuacion.code-snippets</groupId>
+		<artifactId>ecuacion-code-snippets-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
 
 	<properties>
 		<java.version>21</java.version>
@@ -48,7 +52,6 @@
 		<dependency>
 			<groupId>jp.ecuacion.lib</groupId>
 			<artifactId>ecuacion-lib-validation</artifactId>
-			<version>14.32.0</version>
 		</dependency>
 	</dependencies>
 

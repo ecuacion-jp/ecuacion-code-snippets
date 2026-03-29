@@ -2,10 +2,10 @@ package jp.ecuacion.codesnippets.validation.asserttruewithpropertypath;
 
 import jp.ecuacion.lib.validation.constraints.AssertTrueWithPropertyPath;
 
-public record Pilot(String name, boolean eyeSight, boolean physicalStrength) {
+public record PilotWithMessage(String name, boolean eyeSight, boolean physicalStrength) {
 
   @AssertTrueWithPropertyPath(propertyPath = {"eyeSight", "physicalStrength"},
-      message = "{assertTrue.pilot}")
+      message = "パイロットには良い視力と強靭な体力が必要です")
   public boolean isAbleToBecomePilot() {
     return eyeSight && physicalStrength;
   }
