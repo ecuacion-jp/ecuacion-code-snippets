@@ -7,10 +7,10 @@ import jp.ecuacion.lib.core.util.ValidationUtil;
 public class Main {
 
   public static void main(String... args) {
-    使い方();
+    基本的な使い方();
   }
 
-  public static void 使い方() {
+  public static void 基本的な使い方() {
     try {
       Account account = new Account(null, null);
 
