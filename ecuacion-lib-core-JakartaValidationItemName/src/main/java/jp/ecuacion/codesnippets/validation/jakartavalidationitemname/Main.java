@@ -1,9 +1,7 @@
 package jp.ecuacion.codesnippets.validation.jakartavalidationitemname;
 
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import java.util.Set;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
 
 public class Main {
@@ -11,13 +9,23 @@ public class Main {
   private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
   public static void main(String... args) {
-    基本的な使い方();
+//    基本的な使い方();
+    ValidationMessages_propertiesの使用();
   }
 
   public static void 基本的な使い方() {
-    Account account = new Account(null, null);
+    var account = new AccountWithMessage(null, null);
 
-    Set<ConstraintViolation<Account>> set = validator.validate(account);
+    var set = validator.validate(account);
+    for (String message : ExceptionUtil.getMessageList(set)) {
+      System.out.println(message);
+    }
+  }
+
+  private static void ValidationMessages_propertiesの使用() {
+    var account = new Account(null, null);
+
+    var set = validator.validate(account);
     for (String message : ExceptionUtil.getMessageList(set)) {
       System.out.println(message);
     }
