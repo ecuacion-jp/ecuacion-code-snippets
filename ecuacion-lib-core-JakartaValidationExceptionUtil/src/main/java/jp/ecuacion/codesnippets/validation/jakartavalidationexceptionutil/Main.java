@@ -13,10 +13,10 @@ public class Main {
   private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
   public static void main(String[] args) {
-    使い方();
+    基本的な使い方();
   }
 
-  private static void 使い方() {
+  private static void 基本的な使い方() {
     try {
       // 以下、service層のイメージ。ここではlocale不要
       Set<ConstraintViolation<Account>> violations = validator.validate(new Account(null));
