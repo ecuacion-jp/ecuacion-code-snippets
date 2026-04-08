@@ -1,10 +1,8 @@
 package jp.ecuacion.codesnippets.validation.lessthan;
 
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import java.time.LocalDate;
-import java.util.Set;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
 
 public class Main {
@@ -13,41 +11,23 @@ public class Main {
 
   public static void main(String... args) {
     基本的な使い方();
-    ValidationMessages_propertiesの使用();
-    ExceptionUtilを使用したメッセージ出力();
+    Stringの比較();
   }
 
   public static void 基本的な使い方() {
-    ProjectWithMessage project =
-        new ProjectWithMessage("some project", LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 1));
+    LocalDate pastDate = LocalDate.of(2026, 1, 1);
+    var project = new ProjectWithMessage("some project", pastDate, pastDate);
 
-    Set<ConstraintViolation<ProjectWithMessage>> set = validator.validate(project);
-    for (ConstraintViolation<?> v : set) {
-      System.out.println(v.getMessage());
+    var constraintViolations = validator.validate(project);
+    for (var cv : constraintViolations) {
+      System.out.println(cv.getMessage());
     }
   }
 
-  private static void ValidationMessages_propertiesの使用() {
-    ProjectWithMessageKey project =
-        new ProjectWithMessageKey("some project", LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 1));
+  private static void Stringの比較() {
+    var project = new ProjectWithStringDates("some project", "2026/01/01", "2025/12/31");
 
-    Set<ConstraintViolation<ProjectWithMessageKey>> set = validator.validate(project);
-    for (ConstraintViolation<?> v : set) {
-      System.out.println(v.getMessage());
-    }
-  }
-
-  private static void ExceptionUtilを使用したメッセージ出力() {
-    Project project = new Project("some project",
-        LocalDate.of(2026, 1, 1), LocalDate.of(2026, 1, 1));
-
-    Set<ConstraintViolation<Project>> set = validator.validate(project);
-    for (String message : ExceptionUtil.getMessageList(set)) {
-      System.out.println(message);
-    }
-    
-    // 項目名を追加した場合
-    for (String message : ExceptionUtil.getMessageList(set, true)) {
+    for (String message : ExceptionUtil.getMessageList(validator.validate(project))) {
       System.out.println(message);
     }
   }
