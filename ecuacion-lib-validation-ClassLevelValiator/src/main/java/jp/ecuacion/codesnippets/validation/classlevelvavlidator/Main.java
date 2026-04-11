@@ -3,17 +3,24 @@ package jp.ecuacion.codesnippets.validation.classlevelvavlidator;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import jp.ecuacion.lib.core.jakartavalidation.constraintvalidator.CreateMultipleConstraintViolationsConstraintValidatorFactory;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
 
 public class Main {
 
   private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
+  private static Validator multipleValidator = Validation.byDefaultProvider().configure()
+      .constraintValidatorFactory(
+          new CreateMultipleConstraintViolationsConstraintValidatorFactory())
+      .buildValidatorFactory().getValidator();
+
   public static void main(String... args) {
     propertyPathの指定();
     ValidationMessages_propertiesの使用();
     ExceptionUtilを使用したメッセージ出力();
     項目名の表示();
+    getPropertyPathでフィールドを指定する方法();
   }
 
   public static void propertyPathの指定() {
@@ -48,6 +55,14 @@ public class Main {
     var constraintViolations = validator.validate(family);
     for (String message : ExceptionUtil.getMessageList(constraintViolations, true)) {
       System.out.println(message);
+    }
+  }
+
+  private static void getPropertyPathでフィールドを指定する方法() {
+    var project = new FamilyWithMessage(new Person("John", 25), new Person("Paul", 27));
+
+    for (ConstraintViolation<?> v : multipleValidator.validate(project)) {
+      System.out.println(v.getMessage() + "(propertyPath: " + v.getPropertyPath() + ")");
     }
   }
 }
