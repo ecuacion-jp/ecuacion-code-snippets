@@ -18,6 +18,7 @@ public class Main {
     基本的な使い方();
     項目名の表示();
     標準のpropertyPathフィールドを使用する方法();
+    prefixを除外する方法_ReturnTrue();
   }
 
   private static void 基本的な使い方() {
@@ -43,6 +44,15 @@ public class Main {
 
   private static void 標準のpropertyPathフィールドを使用する方法() {
     PilotWithMessage pilot = new PilotWithMessage("John", true, false);
+
+    var set = multipleValidator.validate(pilot);
+    for (ConstraintViolation<?> cv : set) {
+      System.out.println(cv.getMessage() + " （propertyPath : " + cv.getPropertyPath() + "）");
+    }
+  }
+
+  private static void prefixを除外する方法_ReturnTrue() {
+    var pilot = new PilotWithMessageReturnTrue("John", true, false);
 
     var set = multipleValidator.validate(pilot);
     for (ConstraintViolation<?> cv : set) {
