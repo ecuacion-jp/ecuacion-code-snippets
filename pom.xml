@@ -30,12 +30,7 @@
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
-		
-		<ecuacion-lib.version>0.0.1-SNAPSHOT</ecuacion-lib.version>
-		<!--
-		<ecuacion-lib.version>15.0.0-b1</ecuacion-lib.version>
-		-->
+		<ecuacion-lib.version>15.0.0</ecuacion-lib.version>
 	</properties>
 
 	<dependencyManagement>
