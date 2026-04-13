@@ -1,10 +1,14 @@
 package jp.ecuacion.codesnippets.validation.classlevelvavlidator;
 
 import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import java.time.LocalDate;
 import jp.ecuacion.lib.core.jakartavalidation.constraintvalidator.CreateMultipleConstraintViolationsConstraintValidatorFactory;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
+import jp.ecuacion.lib.core.util.ValidationUtil;
+import jp.ecuacion.lib.core.util.ValidationUtil.MessageParameters;
 
 public class Main {
 
@@ -16,14 +20,46 @@ public class Main {
       .buildValidatorFactory().getValidator();
 
   public static void main(String... args) {
-    propertyPathの指定();
     ValidationMessages_propertiesの使用();
     ExceptionUtilを使用したメッセージ出力();
     項目名の表示();
+    propertyPathの指定_階層のあるpropertyPath();
+    propertyPathの指定_ExceptionUtilによるメッセージ出力();
+    propertyPathの指定_itemNamePathの表示();
+    propertyPathの指定_項目名の表示();
     getPropertyPathでフィールドを指定する方法();
   }
 
-  public static void propertyPathの指定() {
+  private static void ValidationMessages_propertiesの使用() {
+    LocalDate date = LocalDate.of(2026, 1, 1);
+    var project = new ProjectWithMessageKey("some project", date, date);
+
+    for (ConstraintViolation<?> v : validator.validate(project)) {
+      System.out.println(v.getMessage());
+    }
+  }
+
+  private static void ExceptionUtilを使用したメッセージ出力() {
+    LocalDate date = LocalDate.of(2026, 1, 1);
+    var project = new Project("some project", date, date);
+
+    var set = validator.validate(project);
+    for (String message : ExceptionUtil.getMessageList(set)) {
+      System.out.println(message);
+    }
+  }
+
+  private static void 項目名の表示() {
+    LocalDate date = LocalDate.of(2026, 1, 1);
+    var project = new Project("some project", date, date);
+
+    var constraintViolations = validator.validate(project);
+    for (String message : ExceptionUtil.getMessageList(constraintViolations, true)) {
+      System.out.println(message);
+    }
+  }
+
+  public static void propertyPathの指定_階層のあるpropertyPath() {
     var family = new FamilyWithMessage(new Person("John", 25), new Person("Paul", 27));
 
     var constraintViolations = validator.validate(family);
@@ -32,15 +68,7 @@ public class Main {
     }
   }
 
-  private static void ValidationMessages_propertiesの使用() {
-    var project = new FamilyWithMessageKey(new Person("John", 25), new Person("Paul", 27));
-
-    for (ConstraintViolation<?> v : validator.validate(project)) {
-      System.out.println(v.getMessage());
-    }
-  }
-
-  private static void ExceptionUtilを使用したメッセージ出力() {
+  private static void propertyPathの指定_ExceptionUtilによるメッセージ出力() {
     Family family = new Family(new Person("John", 25), new Person("Paul", 27));
 
     var set = validator.validate(family);
@@ -49,12 +77,31 @@ public class Main {
     }
   }
 
-  private static void 項目名の表示() {
-    var family = new Family(new Person("John", 25), new Person("Paul", 27));
+  private static void propertyPathの指定_itemNamePathの表示() {
+    Family family = new Family(new Person("John", 25), new Person("Paul", 27));
 
-    var constraintViolations = validator.validate(family);
-    for (String message : ExceptionUtil.getMessageList(constraintViolations, true)) {
-      System.out.println(message);
+    try {
+      MessageParameters params = ValidationUtil.messageParameters().showsItemNamePath(true);
+      ValidationUtil.validateThenThrow(family, params);
+
+    } catch (ConstraintViolationException ex) {
+      for (String message : ExceptionUtil.getMessageList(ex, false)) {
+        System.out.println(message);
+      }
+    }
+  }
+
+  private static void propertyPathの指定_項目名の表示() {
+    Family family = new Family(new Person("John", 25), new Person("Paul", 27));
+
+    try {
+      MessageParameters params =
+          ValidationUtil.messageParameters().isMessageWithItemName(true).showsItemNamePath(true);
+      ValidationUtil.validateThenThrow(family, params);
+    } catch (ConstraintViolationException ex) {
+      for (String message : ExceptionUtil.getMessageList(ex, false)) {
+        System.out.println(message);
+      }
     }
   }
 
