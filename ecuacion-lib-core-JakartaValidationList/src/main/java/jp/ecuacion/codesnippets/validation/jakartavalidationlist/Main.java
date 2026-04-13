@@ -1,8 +1,6 @@
 package jp.ecuacion.codesnippets.validation.jakartavalidationlist;
 
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Path.Node;
 import java.util.Arrays;
 import java.util.List;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
@@ -65,15 +63,6 @@ public class Main {
       ValidationUtil.validateThenThrow(dept, params);
 
     } catch (ConstraintViolationException ex) {
-      for (ConstraintViolation<?> cv: ex.getConstraintViolations()) { 
-        for  (Node node : cv.getPropertyPath()) {
-          System.out.println("============");
-          System.out.println(node.getKind());
-          System.out.println(node.getName());
-          System.out.println(node.toString());
-          System.out.println(node.getIndex());
-        }
-      }
       for (String message : ExceptionUtil.getMessageList(ex, true)) {
         System.out.println(message);
       }
