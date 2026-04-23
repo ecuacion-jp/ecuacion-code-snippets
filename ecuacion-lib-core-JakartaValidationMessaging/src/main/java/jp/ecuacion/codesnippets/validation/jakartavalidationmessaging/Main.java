@@ -5,10 +5,11 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import java.util.Set;
+import jp.ecuacion.lib.core.exception.ConstraintViolationExceptionWithParameters;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
 import jp.ecuacion.lib.core.util.PropertiesFileUtil.Arg;
-import jp.ecuacion.lib.core.util.ValidationUtil;
-import jp.ecuacion.lib.core.util.ValidationUtil.MessageParameters;
+import jp.ecuacion.lib.core.violation.Violations;
+import jp.ecuacion.lib.core.violation.Violations.MessageParameters;
 
 public class Main {
 
@@ -56,7 +57,10 @@ public class Main {
     Account account = new Account(null, null);
 
     try {
-      ValidationUtil.validateThenThrow(account);
+      var constraintViolations = validator.validate(account);
+      if (constraintViolations.size() > 0) {
+        throw new ConstraintViolationException(constraintViolations);
+      }
 
     } catch (ConstraintViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex)) {
@@ -67,10 +71,13 @@ public class Main {
 
   private static void メッセージの項目名表示有無を選択したい_個別validation時() {
     Account account = new Account(null, null);
+    MessageParameters params = Violations.newMessageParameters().isMessageWithItemName(true);
 
     try {
-      MessageParameters params = ValidationUtil.messageParameters().isMessageWithItemName(true);
-      ValidationUtil.validateThenThrow(account, params);
+      var constraintViolations = validator.validate(account);
+      if (constraintViolations.size() > 0) {
+        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
+      }
 
     } catch (ConstraintViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {
@@ -81,12 +88,15 @@ public class Main {
 
   private static void メッセージの前後に追加文言を付加したい() {
     Account account = new Account(null, null);
+    MessageParameters params = Violations.newMessageParameters()
+        .isMessageWithItemName(true)
+        .messagePrefix("アップロードしたエクセルファイルにおいて、");
 
     try {
-      MessageParameters params = ValidationUtil.messageParameters()
-          .isMessageWithItemName(true)
-          .messagePrefix("アップロードしたエクセルファイルにおいて、");
-      ValidationUtil.validateThenThrow(account, params);
+      var constraintViolations = validator.validate(account);
+      if (constraintViolations.size() > 0) {
+        new ConstraintViolationExceptionWithParameters(constraintViolations, params);
+      }
 
     } catch (ConstraintViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {
@@ -97,12 +107,15 @@ public class Main {
 
   private static void Argを使用() {
     Account account = new Account(null, null);
+    MessageParameters params = Violations.newMessageParameters()
+        .isMessageWithItemName(true)
+        .messagePrefix(Arg.message("ABOUT_UPLOADED_EXCEL"));
 
     try {
-      MessageParameters params = ValidationUtil.messageParameters()
-          .isMessageWithItemName(true)
-          .messagePrefix(Arg.message("ABOUT_UPLOADED_EXCEL"));
-      ValidationUtil.validateThenThrow(account, params);
+      var constraintViolations = validator.validate(account);
+      if (constraintViolations.size() > 0) {
+        new ConstraintViolationExceptionWithParameters(constraintViolations, params);
+      }
 
     } catch (ConstraintViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {

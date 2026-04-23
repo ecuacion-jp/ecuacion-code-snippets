@@ -5,10 +5,11 @@ import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import java.time.LocalDate;
+import jp.ecuacion.lib.core.exception.ConstraintViolationExceptionWithParameters;
 import jp.ecuacion.lib.core.jakartavalidation.constraintvalidator.CreateMultipleConstraintViolationsConstraintValidatorFactory;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
-import jp.ecuacion.lib.core.util.ValidationUtil;
-import jp.ecuacion.lib.core.util.ValidationUtil.MessageParameters;
+import jp.ecuacion.lib.core.violation.Violations;
+import jp.ecuacion.lib.core.violation.Violations.MessageParameters;
 
 public class Main {
 
@@ -79,10 +80,13 @@ public class Main {
 
   private static void propertyPathの指定_itemNamePathの表示() {
     Family family = new Family(new Person("John", 25), new Person("Paul", 27));
+    MessageParameters params = Violations.newMessageParameters().showsItemNamePath(true);
 
     try {
-      MessageParameters params = ValidationUtil.messageParameters().showsItemNamePath(true);
-      ValidationUtil.validateThenThrow(family, params);
+      var constraintViolations = validator.validate(family);
+      if (constraintViolations.size() > 0) {
+        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
+      }
 
     } catch (ConstraintViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {
@@ -93,11 +97,15 @@ public class Main {
 
   private static void propertyPathの指定_項目名の表示() {
     Family family = new Family(new Person("John", 25), new Person("Paul", 27));
+    MessageParameters params =
+        Violations.newMessageParameters().isMessageWithItemName(true).showsItemNamePath(true);
 
     try {
-      MessageParameters params =
-          ValidationUtil.messageParameters().isMessageWithItemName(true).showsItemNamePath(true);
-      ValidationUtil.validateThenThrow(family, params);
+      var constraintViolations = validator.validate(family);
+      if (constraintViolations.size() > 0) {
+        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
+      }
+
     } catch (ConstraintViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {
         System.out.println(message);

@@ -1,11 +1,9 @@
 package jp.ecuacion.codesnippets.validation.jakartavalidationexceptionutil;
 
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import java.util.Locale;
-import java.util.Set;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
 
 public class Main {
@@ -19,7 +17,7 @@ public class Main {
   private static void 基本的な使い方() {
     try {
       // 以下、service層のイメージ。ここではlocale不要
-      Set<ConstraintViolation<Account>> violations = validator.validate(new Account(null));
+      var violations = validator.validate(new Account(null));
       if (violations.size() > 0) {
         throw new ConstraintViolationException(violations);
       }

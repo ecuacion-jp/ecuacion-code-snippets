@@ -30,9 +30,26 @@
 		<maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<ecuacion-lib.version>15.0.0</ecuacion-lib.version>
+		<exec.skip>true</exec.skip>
+		<ecuacion-lib.version>16.0.0-beta.1</ecuacion-lib.version>
 	</properties>
 
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>3.6.3</version>
+					<configuration>
+						<skip>true</skip>
+						<mainClass>dummy.Main</mainClass> 
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+  
 	<dependencyManagement>
 		<dependencies>
 
@@ -50,4 +67,25 @@
 
 		</dependencies>
 	</dependencyManagement>
+
+	<modules>
+		<module>ecuacion-lib-core-JakartaValidationExceptionUtil</module>
+		<module>ecuacion-lib-core-JakartaValidationItemName</module>
+		<module>ecuacion-lib-core-JakartaValidationItemNameKey</module>
+		<module>ecuacion-lib-core-JakartaValidationItemNamePattern</module>
+		<module>ecuacion-lib-core-JakartaValidationList</module>
+		<module>ecuacion-lib-core-JakartaValidationMessaging</module>
+		<module>ecuacion-lib-core-JakartaValidationPrefix</module>
+		<module>ecuacion-lib-validation-AnyNotEmpty</module>
+		<module>ecuacion-lib-validation-AssertTrueWithPropertyPath</module>
+		<module>ecuacion-lib-validation-ClassLevelValiator</module>
+		<module>ecuacion-lib-validation-ItemAndItemContainer</module>
+		<module>ecuacion-lib-validation-LessThan</module>
+		<module>ecuacion-lib-validation-NotEmptyWhen</module>
+		<module>ecuacion-lib-validation-PatternWhen</module>
+		<module>ecuacion-lib-validation-PatternWithDescription</module>
+		<module>ecuacion-lib-validation-StringWhen</module>
+		<module>ecuacion-lib-validation-TrueWhen</module>
+		<module>ecuacion-lib-validation-ValidChildObjectItemNamePath</module>
+	</modules>
 </project>

@@ -9,7 +9,7 @@ public class Main {
   private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
   public static void main(String... args) {
-//    基本的な使い方();
+    基本的な使い方();
     ValidationMessages_propertiesの使用();
   }
 
