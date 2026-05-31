@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ご挨拶（Direct）</title>
+</head>
+<body>
+    <h1>お名前を入力してください（Form 直接パターン）</h1>
+    <div th:if="${not #lists.isEmpty(globalErrors)}" style="color:red;">
+        <ul>
+            <li th:each="err : ${globalErrors}" th:text="${err}"></li>
+        </ul>
+    </div>
+    <form th:action="@{/direct/greeting}" th:object="${greetingForm}" method="post">
+        <div>
+            <label>お名前：</label>
+            <input type="text" th:field="*{name}" />
+        </div>
+        <br/>
+        <button type="submit">ご挨拶</button>
+    </form>
+</body>
+</html>
