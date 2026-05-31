@@ -1,15 +1,10 @@
 package jp.ecuacion.codesnippets.validation.jakartavalidationitemnamekey;
 
-import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jp.ecuacion.lib.core.exception.ConstraintViolationExceptionWithParameters;
+import jp.ecuacion.lib.core.exception.ViolationException;
 import jp.ecuacion.lib.core.util.ExceptionUtil;
 import jp.ecuacion.lib.core.violation.Violations;
 
 public class Main {
-
-  private static Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
   public static void main(String... args) {
     itemNameKeyの使用_ドットなし();
@@ -19,16 +14,12 @@ public class Main {
 
   public static void itemNameKeyの使用_ドットなし() {
     OrderForm form = new OrderForm(null, null);
-    System.out.println("getItem: " + form.getItem("productCode").getItemNameKey(form));
+    System.out.println("getItem: " + form.getItem("productCode").getItemNameKey());
 
     try {
       var params = Violations.newMessageParameters().isMessageWithItemName(true);
-      var constraintViolations = validator.validate(form);
-      if (constraintViolations.size() > 0) {
-        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
-      }
-
-    } catch (ConstraintViolationException ex) {
+      new Violations().validate(form).messageParameters(params).throwIfAny();
+    } catch (ViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {
         System.out.println(message);
       }
@@ -37,16 +28,12 @@ public class Main {
 
   public static void itemNameKeyの使用_ドットあり() {
     OrderFormWithDot form = new OrderFormWithDot(null, null);
-    System.out.println("getItem: " + form.getItem("productCode").getItemNameKey(form));
+    System.out.println("getItem: " + form.getItem("productCode").getItemNameKey());
 
     try {
       var params = Violations.newMessageParameters().isMessageWithItemName(true);
-      var constraintViolations = validator.validate(form);
-      if (constraintViolations.size() > 0) {
-        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
-      }
-
-    } catch (ConstraintViolationException ex) {
+      new Violations().validate(form).messageParameters(params).throwIfAny();
+    } catch (ViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {
         System.out.println(message);
       }
@@ -55,16 +42,12 @@ public class Main {
 
   public static void ItemNameKeyClassの使用() {
     OrderFormWithAnnotation form = new OrderFormWithAnnotation(null, null);
-    System.out.println("getItem: " + form.getItem("productCode").getItemNameKey(form));
+    System.out.println("getItem: " + form.getItem("productCode").getItemNameKey());
 
     try {
       var params = Violations.newMessageParameters().isMessageWithItemName(true);
-      var constraintViolations = validator.validate(form);
-      if (constraintViolations.size() > 0) {
-        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
-      }
-
-    } catch (ConstraintViolationException ex) {
+      new Violations().validate(form).messageParameters(params).throwIfAny();
+    } catch (ViolationException ex) {
       for (String message : ExceptionUtil.getMessageList(ex, false)) {
         System.out.println(message);
       }

@@ -95,7 +95,7 @@ public class Main {
     try {
       var constraintViolations = validator.validate(account);
       if (constraintViolations.size() > 0) {
-        new ConstraintViolationExceptionWithParameters(constraintViolations, params);
+        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
       }
 
     } catch (ConstraintViolationException ex) {
@@ -114,7 +114,7 @@ public class Main {
     try {
       var constraintViolations = validator.validate(account);
       if (constraintViolations.size() > 0) {
-        new ConstraintViolationExceptionWithParameters(constraintViolations, params);
+        throw new ConstraintViolationExceptionWithParameters(constraintViolations, params);
       }
 
     } catch (ConstraintViolationException ex) {

@@ -31,7 +31,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<exec.skip>true</exec.skip>
-		<ecuacion-lib.version>16.0.0-beta.1</ecuacion-lib.version>
+		<ecuacion-lib.version>16.0.0-rc.3</ecuacion-lib.version>
+		<ecuacion-splib.version>5.0.0-beta.2</ecuacion-splib.version>
 	</properties>
 
 	<build>
@@ -43,13 +44,13 @@
 					<version>3.6.3</version>
 					<configuration>
 						<skip>true</skip>
-						<mainClass>dummy.Main</mainClass> 
+						<mainClass>dummy.Main</mainClass>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-  
+
 	<dependencyManagement>
 		<dependencies>
 
