@@ -19,7 +19,7 @@ mvn -pl <module-name> compile exec:java
 
 テストフレームワーク・Lintツールは導入されていない。動作確認は `mvn compile exec:java` で Main.java を実行して行う。
 
-カスタムMavenリポジトリ: `https://maven-repo.ecuacion.jp/public`
+依存する ecuacion-lib 系アーティファクトは Maven Central に公開されているため、カスタムMavenリポジトリの参照は不要。
 
 ## モジュール構成
 

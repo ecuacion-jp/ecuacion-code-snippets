@@ -29,14 +29,6 @@
 		</plugins>
 	</build>
 
-	<repositories> 
-	    <repository>
-	        <id>ecuacion-repo-http</id>
-	        <name>ecuacion-repo-http</name>
-	        <url>https://maven-repo.ecuacion.jp/public</url>
-	    </repository>
-	</repositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
