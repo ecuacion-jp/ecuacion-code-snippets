@@ -31,8 +31,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<exec.skip>true</exec.skip>
-		<ecuacion-lib.version>16.0.0-rc.3</ecuacion-lib.version>
-		<ecuacion-splib.version>5.0.0-beta.2</ecuacion-splib.version>
+		<ecuacion-lib.version>16.1.0</ecuacion-lib.version>
+		<ecuacion-splib.version>5.0.0-beta.13</ecuacion-splib.version>
 	</properties>
 
 	<build>
