@@ -32,7 +32,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<exec.skip>true</exec.skip>
 		<ecuacion-lib.version>16.1.0</ecuacion-lib.version>
-		<ecuacion-splib.version>5.0.0-beta.13</ecuacion-splib.version>
+		<ecuacion-splib.version>5.0.0-beta.15</ecuacion-splib.version>
 	</properties>
 
 	<build>
