@@ -23,7 +23,7 @@
 	<parent>
 		<groupId>jp.ecuacion.splib</groupId>
 		<artifactId>ecuacion-splib-parent</artifactId>
-		<version>5.0.0-beta.15</version>
+		<version>5.0.0-beta.16</version>
 		<relativePath>../ecuacion-splib</relativePath>
 	</parent>
 
